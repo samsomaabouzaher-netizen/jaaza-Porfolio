@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "site": "jaaza-011003",
+    "public": "public",
+    "ignore": ["firebase.json", "**/.*"],
+    "cleanUrls": true,
+    "headers": [
+      { "source": "**/*.@(jpg|jpeg|png|webp|mp4)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }] },
+      { "source": "**/*.html", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
+      { "regex": "^/[^.]*$", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] }
+    ]
+  }
+}

@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jakob Abou-Zaher</title>
+<meta name="description" content="Jakob Abou-Zaher – Full-Stack Systems Builder & Product Architect aus Nürnberg. Produktionsreife Enterprise- und SaaS-Plattformen mit deutscher Compliance (ZUGFeRD, FinTS, DATEV, ArbZG, DSGVO).">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%230a0b0d%22/%3E%3Ctext x=%2232%22 y=%2242%22 font-family=%22Arial%22 font-weight=%22700%22 font-size=%2228%22 text-anchor=%22middle%22 fill=%22%23b8f5d0%22%3EJA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* VOICE  Selbstbewusst, technisch, ruhig. Ein Senior, der Systeme in Produktion bringt.
+   IDEA   Proof of Work: die Seite verhält sich wie eine Architektur-Übersicht eines echten Produktivsystems.
+   PICTURE Eine Systemkarte: Next.js-Kern, verbunden mit Compliance-, FinTech-, AI- und Cloud-Modulen; ein Datenpaket läuft durch.
+   COLOUR Tiefes Schwarz/Anthrazit, Glas-Flächen, Mint #b8f5d0 als einziger Akzent.
+   TYPE   Space Grotesk (Display) + Inter (Text), JetBrains Mono nur für Code-Begriffe.
+   LAYOUT Laptop: Titel über volle Breite, Systemkarte breit darunter mit Kennzahlen daneben; Phone: Titel, Karte, Kennzahlen gestapelt. */
+:root{color-scheme:dark;--bg:#0a0b0d;--bg2:#111317;--ink:#eef0f2;--mute:#9aa1aa;--line:rgba(255,255,255,.09);--glass:rgba(255,255,255,.035);--glass2:rgba(255,255,255,.06);--acc:#b8f5d0;--acc2:#7fd9ad;--max:1240px}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(900px 600px at 85% -10%,rgba(184,245,208,.09),transparent 60%),radial-gradient(700px 500px at -10% 40%,rgba(120,140,160,.08),transparent 60%),var(--bg)}
+a{color:inherit}
+img{max-width:100%}
+code,.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,monospace;font-size:.88em;overflow-wrap:anywhere}
+h1,h2,h3{font-family:"Space Grotesk",Inter,sans-serif;letter-spacing:-.02em;line-height:1.05;margin:0;text-wrap:balance}
+h1{font-size:clamp(38px,6vw,72px);font-weight:700}
+h2{font-size:clamp(30px,4vw,46px);font-weight:700}
+h3{font-size:clamp(21px,2.2vw,26px);font-weight:600}
+p{margin:0}
+.wrap{max-width:var(--max);margin:0 auto}
+.band{padding-block:clamp(48px,7vw,104px);padding-left:max(5vw,16px);padding-right:max(5vw,16px)}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:20px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.mute{color:var(--mute)}
+
+/* Navigation */
+.nav{position:sticky;top:0;z-index:20;padding:12px max(5vw,16px);background:rgba(10,11,13,.72);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.brand{font:700 17px "Space Grotesk",sans-serif;text-decoration:none;display:flex;align-items:center;gap:10px;margin-right:auto}
+.brand i{width:10px;height:10px;border-radius:50%;background:var(--acc);box-shadow:0 0 14px var(--acc)}
+.links{display:flex;gap:4px;flex-wrap:wrap}
+.links a{text-decoration:none;color:var(--mute);font-size:15px;padding:10px 12px;border-radius:10px}
+.links a:hover{color:var(--ink);background:var(--glass2)}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 18px;border-radius:12px;font:600 15px Inter,sans-serif;text-decoration:none;border:1px solid var(--line);background:var(--glass2);color:var(--ink);transition:background .2s,border-color .2s}
+.btn:hover{border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.09)}
+.btn:focus-visible,.links a:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.btn.primary{background:var(--acc);color:#07140d;border-color:var(--acc)}
+.btn.primary:hover{background:#d2fbe2}
+.btn svg{width:18px;height:18px;flex:none}
+.social{display:flex;gap:8px}
+.social .btn{padding:10px 12px}
+@media(max-width:860px){.links{display:none}}
+
+/* Hero */
+.hero{padding-top:clamp(40px,6vw,88px)}
+.hero-top{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:center}
+.intro h1{margin-bottom:24px}
+.intro h1 .soft{color:transparent;background:linear-gradient(90deg,#eef0f2,#b8f5d0 70%);-webkit-background-clip:text;background-clip:text}
+/* Porträt */
+.portrait{position:relative;margin:0;justify-self:end;width:min(100%,420px);padding:14px 18px 26px 0}
+.portrait::before{content:"";position:absolute;inset:-8% -10% -4% -6%;z-index:-1;background:radial-gradient(closest-side,rgba(184,245,208,.22),transparent 72%);filter:blur(8px)}
+.frame{position:relative;border-radius:28px;overflow:hidden;aspect-ratio:4/5;padding:1.5px;background:linear-gradient(150deg,rgba(184,245,208,.85),rgba(255,255,255,.08) 38%,rgba(255,255,255,.04) 62%,rgba(184,245,208,.45));box-shadow:0 30px 80px -30px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.04)}
+.frame img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 20%;border-radius:27px;filter:contrast(1.04) saturate(.9);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.portrait:hover .frame img{transform:scale(1.035)}
+.frame::after{content:"";position:absolute;inset:1.5px;border-radius:27px;pointer-events:none;background:linear-gradient(180deg,rgba(10,11,13,0) 52%,rgba(10,11,13,.55) 76%,rgba(10,11,13,.92));box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.nameplate{position:absolute;left:16px;right:16px;bottom:16px;z-index:2;padding:14px 16px;border-radius:16px;background:rgba(14,16,19,.55);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;flex-direction:column;gap:2px}
+.nameplate b{font:700 19px "Space Grotesk",sans-serif;letter-spacing:-.01em}
+.nameplate span{font-size:14px;color:var(--acc)}
+.float{position:absolute;z-index:3;display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:14px;font-size:14px;font-weight:500;white-space:nowrap;background:rgba(18,21,25,.72);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 14px 40px -12px rgba(0,0,0,.7)}
+.float b{font-family:"Space Grotesk",sans-serif;color:var(--acc);font-size:16px}
+.f1{top:34px;left:-28px}
+.f2{top:auto;bottom:150px;right:-14px}
+.live{width:8px;height:8px;border-radius:50%;background:var(--acc);animation:pulse 2.4s infinite}
+@media(max-width:900px){.portrait{justify-self:center;grid-row:1;width:min(78%,300px);padding:10px 0 0}.f1{left:-18px;top:18px;font-size:13px;padding:8px 12px}.f2{display:none}}
+@media(max-width:420px){.f1{left:-10px}}
+/* Video */
+.vidwrap{grid-column:1/-1;display:grid;gap:12px}
+.vidhead{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px;flex-wrap:wrap}
+.vid{border-radius:16px;overflow:hidden;border:1px solid rgba(184,245,208,.22);background:#000;box-shadow:0 20px 60px -24px rgba(0,0,0,.8)}
+.vid video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#000}
+.role{font:500 17px Inter,sans-serif;color:var(--acc);margin-bottom:18px;display:flex;align-items:baseline;gap:10px}.role .dot{transform:translateY(-2px)}
+.role .dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--acc);animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(184,245,208,.5)}50%{box-shadow:0 0 0 8px rgba(184,245,208,0)}}
+.lede{font-size:clamp(17px,1.5vw,19px);color:#c9ced4;max-width:62ch}
+.lede strong{color:var(--ink);font-weight:600}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 12px;border-radius:999px;border:1px solid var(--line);background:var(--glass);font-size:14px;color:#cfd4da;white-space:nowrap}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.stage{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1fr);gap:16px;margin-top:clamp(32px,5vw,56px)}
+.map{position:relative;min-height:440px;overflow:hidden;padding:0}
+.map>svg{position:absolute;inset:0;width:100%;height:100%}
+.map .cap{position:absolute;left:20px;top:16px;font-size:14px;color:var(--mute);z-index:2}
+.map .cap b{color:var(--ink);font-weight:600}
+.stats{display:grid;grid-template-rows:repeat(4,1fr);gap:16px}
+.stat{padding:18px 22px;display:flex;flex-direction:column;justify-content:center}
+.stat b{font:700 clamp(32px,3.4vw,44px)/1 "Space Grotesk",sans-serif;color:var(--acc);font-variant-numeric:tabular-nums}
+.stat span{font-size:14px;color:var(--mute);margin-top:6px}
+@media(max-width:900px){.hero-top{grid-template-columns:minmax(0,1fr)}.stage{grid-template-columns:minmax(0,1fr)}.stats{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:none}.map{min-height:380px}}
+
+/* Compliance strip */
+.strip{border-block:1px solid var(--line);background:rgba(255,255,255,.015);padding:18px 0}
+.marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:44px;width:max-content;animation:marq 38s linear infinite}
+.strip:hover .track{animation-play-state:paused}
+@keyframes marq{to{transform:translateX(-50%)}}
+.strip span{font:600 15px "Space Grotesk",sans-serif;color:#d6dadf;white-space:nowrap}
+.strip span::before{content:"✓";color:var(--acc);margin-right:8px}
+
+/* Trading */
+.tr{padding:clamp(24px,4vw,56px);display:grid;gap:clamp(22px,3vw,36px);border-color:rgba(184,245,208,.28);background:radial-gradient(700px 360px at 100% 0,rgba(184,245,208,.12),transparent 70%),linear-gradient(160deg,rgba(184,245,208,.06),rgba(255,255,255,.02) 50%)}
+.tr-head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:12px 48px;align-items:end}
+.tr-head .tag{grid-column:1/-1;justify-self:start;margin:0}
+.tr-head p{color:#c9ced4;font-size:17px}
+.tr-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tr-card{padding:20px 22px;border-radius:16px;background:rgba(255,255,255,.035);border:1px solid var(--line);display:grid;gap:6px;align-content:start}
+.tr-card b{font:600 19px "Space Grotesk",sans-serif;color:var(--acc)}
+.tr-card span{color:#c4c9cf;font-size:15.5px}
+@media(max-width:900px){.tr-head{grid-template-columns:minmax(0,1fr)}.tr-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* Über mich */
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(28px,5vw,72px);align-items:start}
+.about-l h2{margin-bottom:28px}
+.values{list-style:none;padding:0;margin:0;display:grid;gap:12px}
+.values li{padding:16px 20px;border-radius:16px;display:grid;gap:4px}
+.values b{font:600 18px "Space Grotesk",sans-serif;color:var(--acc)}
+.values span{color:#c4c9cf;font-size:15.5px}
+.story{display:grid;gap:18px;font-size:clamp(17px,1.4vw,18.5px);line-height:1.7;color:#cfd4da;padding-top:6px}
+.story .sign{color:var(--ink);font-weight:500;padding-left:18px;border-left:2px solid var(--acc)}
+@media(max-width:860px){.about{grid-template-columns:minmax(0,1fr)}}
+
+/* Section heads */
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:end;margin-bottom:clamp(28px,4vw,48px)}
+.head p{color:var(--mute);font-size:17px;max-width:56ch}
+@media(max-width:800px){.head{grid-template-columns:minmax(0,1fr)}}
+
+/* Projects */
+.projects{display:grid;gap:20px}
+.proj{padding:clamp(22px,3vw,36px);display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:clamp(20px,3vw,40px)}
+.proj.flag{border-color:rgba(184,245,208,.28);background:linear-gradient(160deg,rgba(184,245,208,.07),rgba(255,255,255,.02) 45%)}
+.tag{display:inline-block;font-size:13px;font-weight:600;color:var(--acc);background:rgba(184,245,208,.1);border:1px solid rgba(184,245,208,.22);padding:4px 10px;border-radius:999px;margin-bottom:14px}
+.proj h3{margin-bottom:12px}
+.proj .desc{color:#c9ced4}
+.feats{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:12px}
+.feats li{padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--line);font-size:15px;color:#c4c9cf}
+.feats b{display:block;color:var(--ink);font-weight:600;margin-bottom:4px;font-size:15.5px}
+.side{display:flex;flex-direction:column;gap:18px}
+.kv dt{font-size:13px;color:var(--mute);margin-bottom:4px}
+.kv dd{margin:0 0 14px;font-size:15.5px}
+.impact{padding:16px 18px;border-radius:14px;background:rgba(184,245,208,.06);border:1px solid rgba(184,245,208,.18);font-size:15.5px}
+.impact dt{color:var(--acc)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:500 13px "JetBrains Mono",monospace;padding:5px 9px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid var(--line);color:#d3d7dc;white-space:nowrap}
+.plinks{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.plinks .btn{font-size:14px;min-height:40px;padding:8px 14px}
+.nda{font-size:14px;color:var(--mute);display:flex;align-items:center;gap:8px}
+@media(max-width:900px){.proj{grid-template-columns:minmax(0,1fr)}}
+
+/* Senior */
+.senior{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.card{padding:clamp(22px,2.6vw,32px)}
+.card h3{font-size:22px;margin-bottom:12px;display:flex;gap:12px;align-items:flex-start}
+.card h3 svg{flex:none;width:28px;height:28px;color:var(--acc);margin-top:-2px}
+.card p{color:#c4c9cf}
+@media(max-width:760px){.senior{grid-template-columns:minmax(0,1fr)}}
+
+/* Stack */
+.stack{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.stack .core{grid-column:span 2}
+.group{padding:clamp(20px,2.4vw,30px)}
+.group h3{font-size:20px;margin-bottom:6px}
+.group .sub{font-size:14px;color:var(--mute);margin-bottom:16px}
+.rows{display:grid;gap:16px}
+.row h4{margin:0 0 8px;font:600 15px Inter,sans-serif;color:#dfe3e7}
+.ai{margin-top:18px;padding:16px 18px;border-radius:14px;background:rgba(184,245,208,.06);border:1px solid rgba(184,245,208,.18)}
+.ai b{color:var(--acc)}
+.rightcol{display:grid;gap:20px;align-content:start}
+@media(max-width:960px){.stack{grid-template-columns:minmax(0,1fr)}.stack .core{grid-column:auto}}
+
+/* Contact */
+.contact{padding:clamp(28px,5vw,64px);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:center;background:linear-gradient(140deg,rgba(184,245,208,.1),rgba(255,255,255,.02) 55%);border-color:rgba(184,245,208,.25)}
+.contact h2{margin-bottom:16px}
+.mail{font:600 clamp(20px,2.6vw,28px) "Space Grotesk",sans-serif;color:var(--acc);text-decoration:none;overflow-wrap:anywhere}
+.mail:hover{text-decoration:underline}
+.clist{display:grid;gap:12px}
+.clist div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px;flex-wrap:wrap}
+.clist div span:first-child{color:var(--mute)}
+.clist a{text-decoration:none}
+.clist a:hover{color:var(--acc)}
+@media(max-width:860px){.contact{grid-template-columns:minmax(0,1fr)}}
+footer{padding:28px max(5vw,16px) 40px;border-top:1px solid var(--line);margin-top:clamp(48px,6vw,88px)}
+footer .wrap{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:space-between;color:var(--mute);font-size:14px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+/* ===== Animationen & Effekte ===== */
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#7fd9ad,#b8f5d0);z-index:50;box-shadow:0 0 12px rgba(184,245,208,.6)}
+.hero{position:relative;isolation:isolate}
+#fx{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
+.split .w{display:inline-block;animation:rise .9s cubic-bezier(.2,.75,.2,1) both}
+.split .w:nth-child(1){animation-delay:.05s}.split .w:nth-child(2){animation-delay:.12s}
+.split .soft .w{background:inherit;-webkit-background-clip:text;background-clip:text}
+.split .soft .w:nth-child(1){animation-delay:.28s}.split .soft .w:nth-child(2){animation-delay:.34s}.split .soft .w:nth-child(3){animation-delay:.40s}.split .soft .w:nth-child(4){animation-delay:.46s}.split .soft .w:nth-child(5){animation-delay:.52s}
+@keyframes rise{from{opacity:0;transform:translateY(.45em) rotate(2deg);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.intro .role,.intro .lede,.intro .meta,.intro .cta{animation:fadeup .9s cubic-bezier(.2,.75,.2,1) both}
+.intro .lede{animation-delay:.6s}.intro .meta{animation-delay:.72s}.intro .cta{animation-delay:.84s}
+.portrait{animation:fadeup 1.1s .3s cubic-bezier(.2,.75,.2,1) both;perspective:1000px}
+@keyframes fadeup{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.frame{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transform-style:preserve-3d;transition:transform .5s cubic-bezier(.2,.75,.2,1)}
+.portrait.active .frame{transition:transform .08s linear}
+.sheen{position:absolute;inset:0;z-index:3;pointer-events:none;border-radius:27px;background:radial-gradient(420px circle at var(--sx,50%) var(--sy,0%),rgba(255,255,255,.16),transparent 45%);opacity:0;transition:opacity .4s}
+.portrait.active .sheen{opacity:1}
+.float{animation:bob 6s ease-in-out infinite}
+.f2{animation-delay:-3s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.spot{position:relative}
+.spot::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s;background:radial-gradient(380px circle at var(--mx,50%) var(--my,50%),rgba(184,245,208,.10),transparent 60%);z-index:0}
+.spot:hover::after{opacity:1}
+.spot>*{position:relative;z-index:1}
+.spot.map>svg{position:absolute}
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.75,.2,1),transform .9s cubic-bezier(.2,.75,.2,1);transition-delay:var(--d,0s)}
+.js .reveal.in{opacity:1;transform:none}
+.proj.flag{position:relative}
+.proj.flag::before{content:"";position:absolute;inset:-1px;border-radius:21px;padding:1px;background:conic-gradient(from var(--ang,0deg),transparent 0 70%,rgba(184,245,208,.9) 80%,transparent 90%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none;animation:spin 7s linear infinite}
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes spin{to{--ang:360deg}}
+#sysmap .ln{transition:stroke .3s,stroke-width .3s}
+#sysmap .ln.on{stroke:#b8f5d0;stroke-width:2}
+#sysmap .nd rect{transition:stroke .35s,fill .35s}
+#sysmap .nd.on rect{stroke:#b8f5d0;fill:#13221a}
+.btn.primary{position:relative;overflow:hidden}
+.btn.primary::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%);animation:shine 4.5s 1.5s ease-in-out infinite}
+@keyframes shine{0%,70%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+@media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none}.track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}#fx{display:none}.proj.flag::before{display:none}}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+<nav class="nav" aria-label="Hauptnavigation">
+  <div class="wrap">
+    <a class="brand" href="#top"><i></i>Jakob Abou-Zaher</a>
+    <div class="links">
+      <a href="#trading">Trading</a>
+      <a href="#ueber-mich">Über mich</a>
+      <a href="#projekte">Projekte</a>
+      <a href="#architektur">Architektur</a>
+      <a href="#stack">Tech-Stack</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+    <div class="social">
+      <!-- TODO: GitHub-URL eintragen -->
+      <a class="btn" id="gh-head" href="#" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg></a>
+    </div>
+  </div>
+</nav>
+
+<header class="band hero" id="top">
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="intro">
+        <div class="role"><span class="dot"></span>Full-Stack Systems Builder · Product Architect · Co-Founder DFJAZ GbR</div>
+        <h1 class="split"><span class="w">Jakob</span> <span class="w">Abou-Zaher.</span><br><span class="soft"><span class="w">Proof</span> <span class="w">of</span> <span class="w">Work</span> <span class="w">over</span> <span class="w">Paper.</span></span></h1>
+        <p class="lede">Ich finde heraus, wo Unternehmen Zeit und Geld mit Papier, Excel und Handarbeit verlieren, und <strong>baue ihnen dafür eigene Software, die im Alltag wirklich genutzt wird</strong>. Von der ersten Idee bis zum Live-Betrieb, oft in wenigen Wochen, und so, dass Buchhaltung, Datenschutz und Gesetz passen.</p>
+        <div class="meta">
+          <span class="pill">Nürnberg · vor Ort, Hybrid &amp; Remote</span>
+          <span class="pill">Trading · Coaching · Handwerk · Soziales · Logistik</span>
+          <span class="pill">Mit KI-Unterstützung entwickelt</span>
+        </div>
+        <div class="cta">
+          <a class="btn primary" href="#projekte">Case Studies ansehen</a>
+          <a class="btn" href="mailto:Jakob@abou-zaher.de">Jakob@abou-zaher.de</a>
+        </div>
+      </div>
+      <figure class="portrait">
+        <div class="frame" id="tilt"><div class="sheen"></div>
+          <img src="jakob.jpg" alt="Porträt von Jakob Abou-Zaher" width="880" height="1100">
+          <figcaption class="nameplate">
+            <b>Jakob Abou-Zaher</b>
+            <span>Full-Stack Systems Builder</span>
+          </figcaption>
+        </div>
+        <div class="float f1"><span class="live"></span>Offen für Senior-Rollen</div>
+        <div class="float f2"><b>5</b> Systeme im Live-Einsatz</div>
+      </figure>
+    </div>
+
+    <div class="stage">
+      <div class="map glass" aria-label="Systemkarte meines Stacks">
+        <div class="cap"><b>Was in meinen Systemen steckt</b></div>
+        <svg id="sysmap" role="img" aria-label="Eine Plattform, verbunden mit KI, Online-Banking, E-Rechnung, DATEV, Handy-App, Datenschutz, Zeiterfassung und Altsystemen"></svg>
+      </div>
+      <div class="stats">
+        <div class="stat glass"><b data-count="5">5</b><span>eigene Systeme im täglichen Einsatz</span></div>
+        <div class="stat glass"><b data-count="25">25</b><span>Bereiche in einer einzigen Firmen-Software</span></div>
+        <div class="stat glass"><b data-count="20" data-suffix="+">20+</b><span>Einrichtungen arbeiten täglich mit Kivo</span></div>
+        <div class="stat glass"><b data-count="150">150</b><span>Mitarbeitende: dafür ist die NK-Software ausgelegt</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip" aria-label="Umgesetzte Vorgaben">
+  <div class="marquee"><div class="track" id="track">
+    <span>E-Rechnung</span><span>Online-Banking-Anbindung</span><span>DATEV-Export</span><span>Arbeitszeitgesetz</span><span>Gesetzeskonforme Buchhaltung</span><span>DSGVO</span><span>Trading-Journal</span><span>Eigene Indikatoren</span><span>KI-Stundenzettel</span><span>iOS- &amp; Android-Apps</span>
+  </div></div>
+</div>
+
+<section class="band" id="trading">
+  <div class="wrap">
+    <div class="tr glass">
+      <div class="tr-head">
+        <span class="tag">Wo meine zwei Welten zusammenkommen</span>
+        <h2>Trading und Software. Endlich beides in einem.</h2>
+        <p>Trading begleitet mich seit Jahren, Software war schon als Kind mein Traum. Heute verbinde ich beides und baue Werkzeuge für Trader, die ich selbst nutzen würde.</p>
+      </div>
+      <div class="tr-grid">
+        <div class="tr-card"><b>Eine komplette Trading-Plattform</b><span>Trades werden automatisch in Echtzeit erfasst, Risiken übersichtlich ausgewertet, und das Coaching läuft direkt in der App.</span></div>
+        <div class="tr-card"><b>Eigene Indikatoren</b><span>Ich entwickle Trading-Indikatoren nach Wunsch und setze Ideen aus der Praxis direkt in Werkzeuge um.</span></div>
+        <div class="tr-card"><b>Leidenschaft fürs Coaching</b><span>Vor zweieinhalb Jahren bin ich zum 1:1-Coaching gekommen und habe dafür eine echte Leidenschaft entwickelt.</span></div>
+      </div>
+      <div class="cta" style="margin-top:4px">
+        <a class="btn primary" href="#projekte">Zur Plattform</a>
+        <a class="btn" href="https://app.dfjaz.de" target="_blank" rel="noopener">app.dfjaz.de ansehen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="ueber-mich" style="padding-top:0">
+  <div class="wrap about">
+    <div class="about-l">
+      <h2>Ich weiß nicht alles. Aber ich lerne alles, was es braucht.</h2>
+      <ul class="values">
+        <li class="glass"><b>Ich lerne schnell</b><span>Neue Technik, neue Branche, neues Gesetz: Ich arbeite mich ein, bis es sitzt.</span></li>
+        <li class="glass"><b>Ich bleibe dran</b><span>Wenn ein Projekt mehr braucht als acht Stunden am Tag, bekommt es die.</span></li>
+        <li class="glass"><b>Ich liefere</b><span>Am Ende zählt, was im Alltag funktioniert. Daran messe ich mich.</span></li>
+      </ul>
+    </div>
+    <div class="story">
+      <p>Schon als kleines Kind war für mich klar: Ich will Informatiker werden.</p>
+      <p>Das Leben ist dann erst einmal anders verlaufen. Ich habe mich fürs Trading entschieden und bin arbeiten gegangen. Für das Lernen, das dieser Traum gebraucht hätte, blieb neben allem anderen einfach keine Zeit mehr.</p>
+      <p>Mit KI habe ich einen Weg gefunden, wieder Anschluss zu bekommen. Nicht als Abkürzung, sondern als Werkzeug: Ich nutze sie, um schneller zu lernen und effizient und sauber zu entwickeln. So habe ich meinen alten Traum wieder aufleben lassen. Daraus sind Plattformen entstanden, die heute in echten Betrieben laufen und jeden Tag benutzt werden. Und das Trading ist dabei nicht verloren gegangen: Es steckt heute in meiner eigenen Trading-Plattform.</p>
+      <p>Vor zweieinhalb Jahren bin ich außerdem zum 1:1-Coaching gekommen und habe dafür eine echte Leidenschaft entwickelt. Mein Ziel ist es jetzt, Trading, Coaching und Entwicklung miteinander zu verbinden. Genau das macht mir am meisten Freude.</p>
+      <p>Ich stelle mich nicht als den perfekten Profi hin, der auf jede Frage sofort die Antwort hat. Wenn ich etwas nicht weiß, setze ich mich dran, bis ich es verstanden habe. Ich gehe gern einen Schritt weiter als nötig und bleibe auch dann, wenn es mal länger dauert.</p>
+      <p class="sign">Was ich mitbringe, ist kein Stapel Zertifikate, sondern Einsatz, Neugier und den Anspruch, am Ende etwas abzuliefern, das wirklich funktioniert.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="projekte" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <h2>Fünf Systeme, die täglich echte Arbeit erledigen</h2>
+      <p>Keine Demo-Apps. Jedes Projekt ersetzt Papier, Excel oder Handarbeit in einem echten Unternehmen und läuft dort im Alltag.</p>
+    </div>
+    <div class="projects" id="projList"></div>
+  </div>
+</section>
+
+<section class="band" id="architektur" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <h2>Was mich auszeichnet</h2>
+      <p>Eine schöne Oberfläche ist der leichte Teil. Die eigentliche Arbeit steckt in Gesetzen, Banken, alten Programmen und Datenschutz. Genau da bin ich zuhause.</p>
+    </div>
+    <div class="senior">
+      <article class="card glass">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>Gesetze und Finanzen sauber umgesetzt</h3>
+        <p>E-Rechnungen, fertige Daten für den Steuerberater, Regeln aus dem Arbeitszeitgesetz und die direkte Anbindung ans Firmenkonto. Das, wovor viele zurückschrecken, baue ich fest in die Software ein.</p>
+      </article>
+      <article class="card glass">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9zM9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg>KI, die echte Arbeit abnimmt</h3>
+        <p>Kein Chatbot zum Vorzeigen, sondern KI, die im Alltag Zeit spart: zum Beispiel handschriftliche Stundenzettel einfach per Handyfoto auslesen, auf Deutsch und Polnisch.</p>
+      </article>
+      <article class="card glass">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="6" rx="2"/><rect x="3" y="14" width="18" height="6" rx="2"/><path d="M7 7h.01M7 17h.01"/></svg>Datenschutz und Unabhängigkeit</h3>
+        <p>Ich ziehe laufende Systeme auf eigene Server bei einem deutschen Anbieter um, abgestimmt mit den Datenschutzbeauftragten. So bleiben die Daten unter Kontrolle des Kunden.</p>
+      </article>
+      <article class="card glass">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h5M15 12h5"/><circle cx="12" cy="12" r="3"/><path d="M4 6v12M20 6v12"/></svg>Alte Systeme ins Heute holen</h3>
+        <p>Bestehende Daten aus alten Programmen übernehme ich sauber in die neue Software, ohne dass der laufende Betrieb stillsteht.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="stack" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <h2>Womit ich arbeite</h2>
+      <p>Für alle, die es genauer wissen wollen. Auf das Wesentliche reduziert.</p>
+    </div>
+    <div class="stack">
+      <div class="group glass core">
+        <h3>Mein täglicher Werkzeugkasten</h3>
+        <p class="sub">Damit baue ich jedes Projekt</p>
+        <div class="rows" id="coreRows"></div>
+        <div class="ai"><b>Schneller durch KI:</b> Ich setze KI-Werkzeuge wie Claude Code und Cursor gezielt beim Entwickeln ein und liefere dadurch deutlich schneller, ohne bei der Qualität zu sparen.</div>
+      </div>
+      <div class="rightcol">
+        <div class="group glass">
+          <h3>Server &amp; Betrieb</h3>
+          <p class="sub">Damit es zuverlässig läuft</p>
+          <div class="chips" id="cloudChips"></div>
+        </div>
+        <div class="group glass">
+          <h3>Automatisierung</h3>
+          <p class="sub">Wenn alte Software mitspielen muss</p>
+          <div class="chips" id="legacyChips"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="kontakt" style="padding-top:0">
+  <div class="wrap">
+    <div class="contact glass">
+      <div>
+        <h2>Lass uns sprechen</h2>
+        <p class="mute" style="margin-bottom:20px;max-width:52ch">Ob Senior-Rolle im Team oder ein Prozess, der endlich digital werden muss: Ich antworte schnell.</p>
+        <a class="mail" href="mailto:Jakob@abou-zaher.de">Jakob@abou-zaher.de</a>
+        <div class="cta">
+          <!-- TODO: GitHub- und LinkedIn-URLs eintragen -->
+          <a class="btn" id="gh-contact" href="#">GitHub</a>
+          <a class="btn" id="li-contact" href="#">LinkedIn</a>
+        </div>
+      </div>
+      <div class="clist">
+        <div><span>Standort</span><span>Nürnberg · Hybrid &amp; Remote</span></div>
+        <div><span>Web</span><span><a href="https://abou-zaher.de">abou-zaher.de</a> · <a href="https://jaaza.de">jaaza.de</a> · <a href="https://dfjaz.de">dfjaz.de</a></span></div>
+        <div><span>Live-Apps</span><span><a href="https://app.nk-lueftungsbau.de">app.nk-lueftungsbau.de</a></span></div>
+        <div><span></span><span><a href="https://app.dfjaz.de">app.dfjaz.de</a> · <a href="https://crk-fishing.com">crk-fishing.com</a></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Jakob Abou-Zaher · Nürnberg</span>
+    <div class="social">
+      <!-- TODO: GitHub- und LinkedIn-URLs eintragen -->
+      <a class="btn" id="gh-foot" href="#">GitHub</a>
+      <a class="btn" id="li-foot" href="#">LinkedIn</a>
+      <a class="btn" href="mailto:Jakob@abou-zaher.de">E-Mail</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+{
+  // ===== Links zentral pflegen =====
+  const LINKS = { github: "#", linkedin: "#" }; // TODO: z. B. "https://github.com/deinname"
+  for (const id of ["gh-head","gh-contact","gh-foot"]) { const el = document.getElementById(id); if (el) el.href = LINKS.github; }
+  for (const id of ["li-contact","li-foot"]) { const el = document.getElementById(id); if (el) el.href = LINKS.linkedin; }
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const md = s => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>");
+
+  const projects = [
+    { flag:true, tag:"Trading · Coaching · Plattform", title:"DFJAZ: Trading- & Coaching-Plattform",
+      desc:"Eine Plattform für Trader und ihre Mentoren, entstanden aus meiner eigenen Erfahrung im Trading. Sie nimmt Tradern die lästige Dokumentation ab, macht Risiken sichtbar und bringt Coach und Schüler an einem Ort zusammen.",
+      feats:[
+        ["Automatisches Trading-Journal","Jeder Trade wird direkt aus MetaTrader übernommen, in Echtzeit und ohne Eintippen. Checklisten für jede Phase helfen, diszipliniert zu bleiben."],
+        ["Risiko immer im Blick","Verluste, Drawdown und die Regeln von Prop-Firmen werden live überwacht und übersichtlich ausgewertet."],
+        ["Coaching direkt in der App","Mentoren begleiten ihre Trader auf derselben Plattform. Abos und Zahlungen laufen automatisch."],
+        ["Eigene Indikatoren","Trading-Indikatoren entwickle ich nach Wunsch und setze Ideen aus der Praxis direkt in Werkzeuge um."]
+      ],
+      role:"Mitgründer & leitender Entwickler",
+      impact:"Trades werden zu 100 % automatisch erfasst, ganz ohne Eintippen. Wichtige Risiko-Grenzen werden live überwacht.",
+      stack:["Next.js","TypeScript","MetaTrader-Anbindung","Stripe (Abos)"],
+      links:[["app.dfjaz.de","https://app.dfjaz.de"],["dfjaz.de","https://dfjaz.de"]],
+      video:null /* TODO: Teaser einfügen, z. B. "dfjaz.mp4", poster:"dfjaz-poster.jpg", videoLen:"1:30 Min." */ },
+    { flag:true, tag:"Handwerk · Personal · Buchhaltung", title:"NK-Lüftungsbau: die komplette Firmen-Software",
+      desc:"Eine Plattform für einen Lüftungsbaubetrieb, die Personal, Baustellen, Arbeitszeiten und Rechnungen an einem Ort zusammenführt. Auf Deutsch und Polnisch, im Browser und als Handy-App.",
+      feats:[
+        ["Stundenzettel per Foto","Mitarbeitende fotografieren ihren Stundenzettel, auch handschriftlich und auf Polnisch. Eine KI liest ihn aus, rechnet Pausen ein und warnt, wenn jemand mehr als 10 Stunden am Tag gearbeitet hat."],
+        ["Rechnungen und Banking in einem","Rechnungen entstehen direkt im System, im gesetzlich vorgeschriebenen E-Rechnungsformat. Das Firmenkonto ist angebunden, Zahlungseingänge werden automatisch zugeordnet, und der Steuerberater bekommt alles fertig für DATEV."],
+        ["Personal und Baustellenplanung","Digitale Personalakte, sichere Anmeldung mit Rollen und Rechten, automatische Berechnung von Stunden und Zuschlägen sowie die Wochenplanung von Kolonnen und Fahrzeugen."]
+      ],
+      role:"Alleinentwickler & Produkt-Architekt: alles aus einer Hand",
+      impact:"25 Bereiche in einer einzigen Software statt vieler Insellösungen. Ausgelegt für 50–150 Mitarbeitende, 68 Personalakten aus dem Altsystem übernommen.",
+      stack:["Next.js","React","TypeScript","Firebase","Google Gemini (KI)","Android-App"],
+      links:[["app.nk-lueftungsbau.de","https://app.nk-lueftungsbau.de"]] },
+    { flag:true, tag:"Soziales · Bildung · Software-Abo", title:"Kivo: Software für Schulbegleitung und Kitas",
+      desc:"Träger organisieren damit ihre Schulbegleitung und Kitas komplett digital: Arbeitszeiten, Dienstpläne, die passende Zuordnung von Begleitern zu Kindern, Abrechnung mit den Kostenträgern, Elternportal und Schulungen. Früher bekannt als SchulbegleiterPro bzw. Kibook.",
+      role:"Alleinentwickler & Produktgründer: Konzept, Umsetzung, Datenschutz-Abstimmung und Einführung",
+      impact:"Im Einsatz beim ASB in über 20 Einrichtungen. Papier-Stundenzettel komplett abgeschafft; die monatliche Abrechnung dauert statt mehrerer Tage nur noch wenige Klicks.",
+      stack:["Next.js","React","TypeScript","Supabase","iOS- & Android-App"],
+      links:[["Onboarding-Portal","https://kitaelternapp-asb-wunderkinder.jaaza.de"]], note:"Geschlossenes System im Live-Betrieb",
+      video:"kivo.mp4", poster:"kivo-poster.jpg", videoLen:"1:52 Min." },
+    { tag:"Großhandel · Logistik", title:"Großhandel: Bestellung, Tour und Rechnung in einem System",
+      desc:"Für einen Obst- und Gemüsegroßhändler: Kunden bestellen online, Liefertouren werden automatisch geplant, Fahrer haben ihre eigene App, der Lagerbestand ist immer aktuell, und Lieferscheine und Rechnungen entstehen von selbst.",
+      role:"Entwickler & Prozess-Architekt, genau auf den echten Ablauf im Lager ab 4 Uhr morgens zugeschnitten",
+      impact:"Die komplette Frühschicht läuft digital, beim Zusammenstellen der Bestellungen passieren deutlich weniger Fehler, und Rechnungen schreiben sich von selbst.",
+      stack:["Next.js","TypeScript","Handy-App (PWA)"],
+      links:[], note:"Kundenprojekt unter Verschwiegenheit, Einblick auf Anfrage" },
+    { tag:"Automatisierung · Online-Shop", title:"Automatisierung für alte Verwaltungssoftware",
+      desc:"Viele Behörden- und Verwaltungsprogramme lassen sich nicht einfach mit neuer Software verbinden. Ich bringe sie trotzdem zusammen, über mehr als 20 Einrichtungen hinweg, und baue zusätzlich eigene Online-Shops.",
+      role:"IT-Administrator & Automatisierer",
+      impact:"Ein selbst gebauter Software-Roboter liest Betreuungsverträge aus PDFs und trägt sie automatisch in die Behördensoftware ein. Das spart jedes Jahr hunderte Stunden Abtipparbeit.",
+      stack:["Power Automate","DocuWare","WooCommerce","Stripe"],
+      links:[["crk-fishing.com","https://crk-fishing.com"]] }
+  ];
+
+  const arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg>';
+  document.getElementById("projList").innerHTML = projects.map(p => `
+    <article class="proj glass${p.flag ? " flag" : ""}">
+      ${p.video ? `<div class="vidwrap"><div class="vidhead"><span class="tag" style="margin:0">Produkt-Teaser</span><span class="mute">${esc(p.videoLen || "")}</span></div><div class="vid"><video controls playsinline preload="none"${p.poster ? ` poster="${esc(p.poster)}"` : ""}><source src="${esc(p.video)}" type="video/mp4">Dein Browser kann dieses Video nicht abspielen.</video></div></div>` : ""}
+      <div>
+        <span class="tag">${esc(p.tag)}</span>
+        <h3>${esc(p.title)}</h3>
+        <p class="desc">${md(p.desc)}</p>
+        ${p.feats ? `<ul class="feats">${p.feats.map(f => `<li><b>${esc(f[0])}</b>${md(f[1])}</li>`).join("")}</ul>` : ""}
+      </div>
+      <div class="side">
+        <dl class="kv" style="margin:0">
+          <dt>Meine Rolle</dt><dd>${esc(p.role)}</dd>
+        </dl>
+        <dl class="kv impact" style="margin:0"><dt>Wirkung</dt><dd style="margin:0">${esc(p.impact)}</dd></dl>
+        <div><div class="kv"><dt>Technik</dt></div><div class="chips">${p.stack.map(s => `<span class="chip">${esc(s)}</span>`).join("")}</div></div>
+        <div class="plinks">
+          ${p.links.map(l => `<a class="btn" href="${esc(l[1])}" target="_blank" rel="noopener">${esc(l[0])}${arrow}</a>`).join("")}
+          ${p.note ? `<span class="nda">${esc(p.note)}</span>` : ""}
+        </div>
+      </div>
+    </article>`).join("");
+
+  const core = [
+    ["Web & Apps",["Next.js","React","TypeScript","Tailwind CSS","iOS- & Android-Apps"]],
+    ["Daten & Sicherheit",["Firebase","Supabase / PostgreSQL","Node.js","Zwei-Faktor-Login"]],
+    ["KI & Finanzen",["Google Gemini","Online-Banking (FinTS)","E-Rechnung (ZUGFeRD / XRechnung)","DATEV","Stripe"]]
+  ];
+  document.getElementById("coreRows").innerHTML = core.map(r => `<div class="row"><h4>${esc(r[0])}</h4><div class="chips">${r[1].map(s => `<span class="chip">${esc(s)}</span>`).join("")}</div></div>`).join("");
+  const chips = a => a.map(s => `<span class="chip">${esc(s)}</span>`).join("");
+  document.getElementById("cloudChips").innerHTML = chips(["Hetzner","Coolify","Docker","Domains & DNS","Microsoft 365"]);
+  document.getElementById("legacyChips").innerHTML = chips(["Power Automate","DocuWare","Python","Behörden-Schnittstellen"]);
+
+  // ===== Systemkarte =====
+  const svg = document.getElementById("sysmap");
+  const nodes = [
+    ["KI","liest Stundenzettel"],["Online-Banking","Zahlungen abgleichen"],["E-Rechnung","gesetzeskonform"],["DATEV","für den Steuerberater"],
+    ["Handy-App","iOS & Android"],["Datenschutz","DSGVO"],["Zeiterfassung","Arbeitszeitgesetz"],["Altsysteme","Daten übernehmen"]
+  ];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let raf = 0;
+  const draw = () => {
+    const W = svg.clientWidth, H = svg.clientHeight;
+    if (!W || !H) return;
+    const small = W < 520;
+    const cx = W / 2, cy = H / 2 + 14;
+    const rx = Math.min(W / 2 - (small ? 62 : 96), small ? 999 : W * 0.36), ry = (H / 2) - (small ? 52 : 58);
+    const pts = nodes.map((n, i) => { const a = -Math.PI / 2 + i * (2 * Math.PI / nodes.length) + Math.PI / 8; return { n, x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a) }; });
+    const nw = small ? 116 : 164, nh = small ? 40 : 52;
+    let out = `<defs><radialGradient id="g" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#b8f5d0" stop-opacity=".22"/><stop offset="1" stop-color="#b8f5d0" stop-opacity="0"/></radialGradient></defs>`;
+    out += `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="none" stroke="rgba(255,255,255,.07)" stroke-dasharray="3 6"/>`;
+    out += pts.map((p, i) => `<path class="ln" id="l${i}" d="M${cx} ${cy} L${p.x} ${p.y}" stroke="rgba(184,245,208,.22)" stroke-width="1.2"/>`).join("");
+    out += `<circle cx="${cx}" cy="${cy}" r="${small ? 80 : 120}" fill="url(#g)"/>`;
+    const cw = small ? 128 : 176, ch = small ? 56 : 70;
+    out += `<rect x="${cx - cw / 2}" y="${cy - ch / 2}" width="${cw}" height="${ch}" rx="16" fill="#0f1a14" stroke="#b8f5d0" stroke-width="1.4"/>`;
+    out += `<text x="${cx}" y="${cy - (small ? 3 : 4)}" text-anchor="middle" fill="#eef0f2" font-family="Space Grotesk, Inter, system-ui, sans-serif" font-weight="700" font-size="${small ? 15 : 18}">Eine Plattform</text>`;
+    out += `<text x="${cx}" y="${cy + (small ? 15 : 19)}" text-anchor="middle" fill="#b8f5d0" font-family="Inter, system-ui, sans-serif" font-size="${small ? 12 : 13}">Web &amp; Handy</text>`;
+    out += pts.map((p, i) => `<g class="nd" id="n${i}"><rect x="${p.x - nw / 2}" y="${p.y - nh / 2}" width="${nw}" height="${nh}" rx="12" fill="#14171b" stroke="rgba(255,255,255,.14)"/>
+      <text x="${p.x}" y="${p.y + (small ? 5 : -2)}" text-anchor="middle" fill="#eef0f2" font-family="Space Grotesk, Inter, system-ui, sans-serif" font-weight="600" font-size="${small ? 13 : 15}">${esc(p.n[0])}</text>
+      ${small ? "" : `<text x="${p.x}" y="${p.y + 16}" text-anchor="middle" fill="#9aa1aa" font-family="Inter, system-ui, sans-serif" font-size="12.5">${esc(p.n[1])}</text>`}</g>`).join("");
+    out += `<circle id="pkt" r="4.5" fill="#b8f5d0" style="filter:drop-shadow(0 0 6px #b8f5d0)" cx="${cx}" cy="${cy}"/>`;
+    svg.innerHTML = out;
+    cancelAnimationFrame(raf);
+    if (reduce) return;
+    const pkt = svg.querySelector("#pkt");
+    let t0 = performance.now(), lastI = -1;
+    const step = now => {
+      const T = Math.max(0, now - t0) / 1400, i = Math.floor(T) % pts.length, f = T % 1;
+      const e = f < .5 ? 2 * f * f : 1 - ((-2 * f + 2) ** 2) / 2;
+      const p = pts[i];
+      if (i !== lastI) { svg.querySelectorAll(".on").forEach(x => x.classList.remove("on")); svg.querySelector("#l" + i)?.classList.add("on"); lastI = i; }
+      if (f > .55) svg.querySelector("#n" + i)?.classList.add("on");
+      pkt.setAttribute("cx", cx + (p.x - cx) * e);
+      pkt.setAttribute("cy", cy + (p.y - cy) * e);
+      raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+  };
+  const ro = new ResizeObserver(draw);
+  ro.observe(svg);
+  document.fonts?.ready.then(draw);
+
+  // ===== Effekte =====
+  document.documentElement.classList.add("js");
+
+  // Track für Endlos-Laufband verdoppeln
+  const track = document.getElementById("track");
+  if (track) track.innerHTML += track.innerHTML.replace(/<span>/g, '<span aria-hidden="true">');
+
+  // Scroll-Fortschritt
+  const prog = document.getElementById("progress");
+  const onScroll = () => { const h = document.documentElement; prog.style.transform = `scaleX(${h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight)})`; };
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  // Reveal beim Scrollen
+  const revealEls = document.querySelectorAll(".head, .proj, .card, .group, .tr, .about-l, .story, .values li, .contact, .stage");
+  revealEls.forEach(el => el.classList.add("reveal"));
+  document.querySelectorAll(".senior .card, .values li").forEach((el, i) => el.style.setProperty("--d", (i % 4) * 0.08 + "s"));
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  revealEls.forEach(el => io.observe(el));
+
+  // Spotlight auf Glas-Karten
+  document.querySelectorAll(".proj, .card, .stat, .group, .tr-card, .values li, .map").forEach(el => {
+    el.classList.add("spot");
+    el.addEventListener("pointermove", e => { const r = el.getBoundingClientRect(); el.style.setProperty("--mx", e.clientX - r.left + "px"); el.style.setProperty("--my", e.clientY - r.top + "px"); });
+  });
+
+  // Zahlen hochzählen
+  const cio = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return; cio.unobserve(e.target);
+    const el = e.target, end = +el.dataset.count, suf = el.dataset.suffix || "";
+    if (reduce) return;
+    const t0 = performance.now(), dur = 1400;
+    const tick = now => { const k = Math.min(1, (now - t0) / dur), v = Math.round(end * (1 - (1 - k) ** 3)); el.textContent = v + suf; if (k < 1) requestAnimationFrame(tick); };
+    requestAnimationFrame(tick);
+  }), { threshold: 0.6 });
+  document.querySelectorAll("[data-count]").forEach(el => cio.observe(el));
+
+  // 3D-Neigung des Porträts
+  const por = document.querySelector(".portrait"), frame = document.getElementById("tilt");
+  if (por && !reduce && matchMedia("(hover: hover)").matches) {
+    por.addEventListener("pointermove", e => {
+      const r = frame.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      por.classList.add("active");
+      frame.style.setProperty("--ry", (x - .5) * 14 + "deg"); frame.style.setProperty("--rx", (.5 - y) * 12 + "deg");
+      frame.style.setProperty("--sx", x * 100 + "%"); frame.style.setProperty("--sy", y * 100 + "%");
+    });
+    por.addEventListener("pointerleave", () => { por.classList.remove("active"); frame.style.setProperty("--rx", "0deg"); frame.style.setProperty("--ry", "0deg"); });
+  }
+
+  // Interaktives Punkt-Raster im Hintergrund
+  const cv = document.getElementById("fx");
+  if (cv && !reduce) {
+    const ctx = cv.getContext("2d");
+    let W = 0, H = 0, dpr = 1, mx = -9999, my = -9999, tmx = -9999, tmy = -9999, run = true, fxRaf = 0;
+    const size = () => { dpr = Math.min(2, devicePixelRatio || 1); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); };
+    const fxRo = new ResizeObserver(size); fxRo.observe(cv);
+    const hero = document.getElementById("top");
+    hero.addEventListener("pointermove", e => { const r = cv.getBoundingClientRect(); tmx = e.clientX - r.left; tmy = e.clientY - r.top; });
+    hero.addEventListener("pointerleave", () => { tmx = tmy = -9999; });
+    const vis = new IntersectionObserver(es => { run = es[0].isIntersecting; if (run) { cancelAnimationFrame(fxRaf); fxRaf = requestAnimationFrame(frameFx); } });
+    vis.observe(hero);
+    const G = 30;
+    const frameFx = t => {
+      if (!run) return;
+      mx += (tmx - mx) * .12; my += (tmy - my) * .12;
+      if (tmx < -1000) { mx = tmx; my = tmy; }
+      ctx.clearRect(0, 0, W, H);
+      const time = t / 1000;
+      for (let y = G / 2; y < H; y += G) for (let x = G / 2; x < W; x += G) {
+        const wave = .5 + .5 * Math.sin(x * .012 + y * .018 - time * 1.1);
+        const d = Math.hypot(x - mx, y - my), near = Math.max(0, 1 - d / 220);
+        const a = .05 + wave * .07 + near * .75;
+        const push = near * 10, ang = Math.atan2(y - my, x - mx);
+        ctx.fillStyle = near > .02 ? `rgba(184,245,208,${a})` : `rgba(200,210,220,${a})`;
+        ctx.beginPath(); ctx.arc(x + Math.cos(ang) * push, y + Math.sin(ang) * push, 1.1 + near * 1.6, 0, 6.283); ctx.fill();
+      }
+      fxRaf = requestAnimationFrame(frameFx);
+    };
+    fxRaf = requestAnimationFrame(frameFx);
+  }
+}
+</script>
+</body>
+</html>
