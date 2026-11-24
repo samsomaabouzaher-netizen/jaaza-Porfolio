@@ -1,0 +1,14 @@
+{
+  "name": "jaaza-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portfolio Website von Jakob Abou-Zaher",
+  "scripts": {
+    "dev": "vite public --open",
+    "build": "vite build public --outDir ../dist --emptyOutDir",
+    "preview": "vite preview public"
+  },
+  "devDependencies": {
+    "vite": "^6.2.0"
+  }
+}
